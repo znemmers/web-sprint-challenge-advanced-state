@@ -18,7 +18,7 @@ export function moveCounterClockwise() {
 }
 
 export function selectAnswer() { 
-  return {type: SET_SELECTED_ANSWER}
+  return {type: SET_SELECTED_ANSWER, payload: answer_id}
 }
 
 export function setMessage(message) { 
@@ -44,6 +44,11 @@ export function fetchQuiz() {
     // On successful GET: 
     // - Dispatch an action to send the obtained quiz to its state
     // http://localhost:9000/api/quiz/next
+   axios.get(`http://localhost:9000/api/quiz/next`)
+   .then(res => {
+    dispatch(setQuiz(res.data))
+   })
+   .catch(err => console.log(err))
   }
 }
 export function postAnswer() {

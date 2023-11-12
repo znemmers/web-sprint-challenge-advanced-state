@@ -4,12 +4,12 @@ import * as actionCreators from '../state/action-creators'
 
 export function Form(props) {
 
-  const onChange = evt => {
-
+  const onChange = e => {
+    e.preventDefault();
   }
 
-  const onSubmit = evt => {
-
+  const onSubmit = e => {
+    e.preventDefault();
   }
 
   return (

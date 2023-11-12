@@ -14,7 +14,7 @@ import { moveClockwise, moveCounterClockwise } from '../state/action-creators'
     moveCounterClockwise();
   }
 
-console.log(props)
+
   return (
     <div id="wrapper">
       <div id="wheel">
