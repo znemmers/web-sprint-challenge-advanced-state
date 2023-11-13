@@ -28,7 +28,6 @@ function Quiz(props) {
     console.log('clicked')
   }
 
-  const [a, setA] = useState()
 
   return (
     <div id="wrapper">

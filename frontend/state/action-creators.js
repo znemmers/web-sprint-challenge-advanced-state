@@ -18,7 +18,7 @@ export function moveCounterClockwise() {
 }
 
 export function selectAnswer() { 
-  return {type: SET_SELECTED_ANSWER, payload: answer_id}
+  return {type: SET_SELECTED_ANSWER}
 }
 
 export function setMessage(message) { 
