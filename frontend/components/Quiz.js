@@ -9,8 +9,6 @@ function Quiz(props) {
   useEffect(() => {
     fetchQuiz()
   }, [])
-
-  console.log(props.quiz)
   
   const handleButtonClick = (buttonId) => {
     selectAnswer(buttonId)
