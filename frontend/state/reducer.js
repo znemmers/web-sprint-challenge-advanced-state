@@ -33,11 +33,14 @@ function quiz(state = initialQuizState, action) {
   }
 }
 
-const initialSelectedAnswerState = {isClicked: false}
+const initialSelectedAnswerState = {activeButton: null}
 function selectedAnswer(state = initialSelectedAnswerState, action) {
   switch(action.type){
     case(SET_SELECTED_ANSWER):
-      return 
+      return ({
+        ...state,
+        activeButton: action.payload
+      })
   default:
     return state
   }

@@ -17,8 +17,8 @@ export function moveCounterClockwise() {
   return {type: MOVE_COUNTERCLOCKWISE}
 }
 
-export function selectAnswer() { 
-  return {type: SET_SELECTED_ANSWER}
+export function selectAnswer(buttonId) { 
+  return {type: SET_SELECTED_ANSWER, payload: buttonId}
 }
 
 export function setMessage(message) { 
@@ -66,6 +66,12 @@ export function postQuiz() {
     // - Dispatch the correct message to the the appropriate state
     // - Dispatch the resetting of the form
     // http://localhost:9000/api/quiz/answer
+    axios.post('http://localhost:9000/api/quiz/answer')
+    .then(res => {
+      console.log(res)
+      dispatch(setMessage(res.data))
+    })
+    .catch(err => console.log(err))
   }
 }
 // ❗ On promise rejections, use log statements or breakpoints, and put an appropriate error message in state

@@ -12,15 +12,8 @@ function Quiz(props) {
 
   console.log(props.quiz)
   
-  const handleSelect = () => {
-    // need to update className to "answer selected" on click, button text changes to SELECTED -- currently selects both answers when clicked
-    selectAnswer()
-    
-  }
-
-  const handleSelectToo = () => {
-    // need to update className to "answer selected" on click, button text changes to SELECTED
-    selectAnswer()
+  const handleButtonClick = (buttonId) => {
+    selectAnswer(buttonId)
   }
 
   const handleSubmit = (e) => {
@@ -40,17 +33,17 @@ function Quiz(props) {
             <h2>{props.quiz.question}</h2>
 
             <div id="quizAnswers"> 
-              <div className={`${props.ans === 1 ? 'answer selected' : 'answer'}`}>  
+              <div className={props.ans.activeButton === 'button1' ? 'answer selected' : 'answer'}>  
                   {props.quiz.answers.length ? props.quiz.answers[0].text : ''}
-                <button id='first button' onClick={handleSelect}>
-                  {props.ans === 1 ? 'SELECTED' : 'Select'}
+                <button onClick={() => handleButtonClick('button1')}>
+                  {props.ans.activeButton === 'button1' ? 'SELECTED' : 'Select'}
                 </button>
               </div>
 
-              <div className={`${props.ans === 1 ? 'answer selected' : 'answer'}`}>
+              <div className={props.ans.activeButton === 'button2' ? 'answer selected' : 'answer'}>
                  {props.quiz.answers.length ? props.quiz.answers[1].text : ''}
-                <button id= 'second button' onClick={handleSelectToo}>
-                  {props.ans === 1 ? 'SELECTED' : 'Select'}
+                <button onClick={() => handleButtonClick('button2')}>
+                  {props.ans.activeButton=== 'button2' ? 'SELECTED' : 'Select'}
                 </button>
               </div>
             </div>
