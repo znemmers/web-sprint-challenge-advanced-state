@@ -18,12 +18,13 @@ function wheel(state = initialWheelState, action) {
   }
 }
 
-const initialQuizState = {question: '', answers: []}
+const initialQuizState = {quiz_id: '', question: '', answers: []}
 function quiz(state = initialQuizState, action) {
   switch(action.type){
     case(SET_QUIZ_INTO_STATE):
     return ({
       ...state,
+      quiz_id: action.payload.quiz_id,
       question: action.payload.question,
       answers: action.payload.answers
     })
@@ -46,13 +47,13 @@ function selectedAnswer(state = initialSelectedAnswerState, action) {
   }
 }
 
-const initialMessageState = ''
+const initialMessageState = {message: ''}
 function infoMessage(state = initialMessageState, action) {
   switch(action.type){
     case(SET_INFO_MESSAGE):
     return({
       ...state,
-      payload
+      message: action.payload.message
     })
   default:
     return state
