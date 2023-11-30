@@ -52,7 +52,6 @@ export function fetchQuiz() {
   }
 }
 export function postAnswer(quiz_id, answer_id) {
-  console.log(quiz_id, answer_id)
   return function (dispatch) {
     // On successful POST:
     // - Dispatch an action to reset the selected answer state
@@ -64,22 +63,30 @@ export function postAnswer(quiz_id, answer_id) {
       answer_id: answer_id
     })
     .then(res => {
-      console.log(res.data)
       dispatch(setMessage(res.data))
-    })
-    .catch(err => console.log(err))
-    .finally(() => {
       dispatch(fetchQuiz())
     })
+    .catch(err => console.log(err))
+    
   }
 }
-export function postQuiz() {
+export function postQuiz(question_text, true_answer_text, false_answer_text) {
   return function (dispatch) {
     // On successful POST:
     // - Dispatch the correct message to the the appropriate state
     // - Dispatch the resetting of the form
     // http://localhost:9000/api/quiz/new 
-    
+    axios.post('http://localhost:9000/api/quiz/new', {
+      question_text: newQuestion.value,
+      true_answer_text: newTrueAnswer.value,
+      false_answer_text: newFalseAnswer.value
+    })
+    .then(res => {
+      console.log(res.data.question)
+      dispatch(setMessage(`Congrats: "${res.data.question}" is a great question!`))
+      dispatch(resetForm())
+    })
+    .catch(err => console.log(err)) 
   }
 }
 // ❗ On promise rejections, use log statements or breakpoints, and put an appropriate error message in state
