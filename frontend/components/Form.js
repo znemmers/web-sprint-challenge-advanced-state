@@ -1,29 +1,21 @@
-import React, {useState} from 'react'
-import { connect } from 'react-redux'
-import * as actionCreators from '../state/action-creators'
+import React from 'react';
+import { connect } from 'react-redux';
+import { inputChange, postQuiz } from '../state/action-creators';
 
 export function Form(props) {
-  const {inputChange, postQuiz} = props
-
-  const [formData, setFormData] = useState({
-    newQuestion: '',
-    newTrueAnswer: '',
-    newFalseAnswer: '',
-  });
+  const { inputChange, postQuiz, form } = props;
 
   const onChange = (e) => {
     const { id, value } = e.target;
-    inputChange(value);
-    setFormData((prevData) => ({ ...prevData, [id]: value }));
+    inputChange({ id, value });
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
-    postQuiz(newQuestion.value, newTrueAnswer.value, newFalseAnswer.value)
+    postQuiz(form.newQuestion, form.newTrueAnswer, form.newFalseAnswer);
+  };
 
-  }
-
-  const isSubmitDisabled = Object.values(formData).some((value) => value.trim() === '');
+  const isSubmitDisabled = Object.values(form).some((value) => value.trim().length < 2);
 
   return (
     <form id="form" onSubmit={onSubmit}>
@@ -31,10 +23,15 @@ export function Form(props) {
       <input maxLength={50} onChange={onChange} id="newQuestion" placeholder="Enter question" />
       <input maxLength={50} onChange={onChange} id="newTrueAnswer" placeholder="Enter true answer" />
       <input maxLength={50} onChange={onChange} id="newFalseAnswer" placeholder="Enter false answer" />
-      <button id="submitNewQuizBtn" disabled={isSubmitDisabled}>Submit new quiz</button>
+      <button id="submitNewQuizBtn" disabled={isSubmitDisabled}>
+        Submit new quiz
+      </button>
     </form>
-  )
+  );
 }
 
- 
-export default connect(st => st, actionCreators)(Form)
+const mapStateToProps = (state) => ({
+  form: state.form,
+});
+
+export default connect(mapStateToProps, { inputChange, postQuiz })(Form);
