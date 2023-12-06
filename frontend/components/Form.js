@@ -4,7 +4,7 @@ import { inputChange, postQuiz } from '../state/action-creators';
 
 export function Form(props) {
   const { inputChange, postQuiz, form } = props;
-
+  
   const onChange = (e) => {
     const { id, value } = e.target;
     inputChange({ id, value });

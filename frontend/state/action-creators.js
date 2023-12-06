@@ -22,7 +22,7 @@ export function selectAnswer(buttonId) {
 }
 
 export function setMessage(message) { 
-  return {type: SET_INFO_MESSAGE, payload: message}
+  return {type: SET_INFO_MESSAGE, payload: typeof message === 'string' ? { message } : message}
 }
 
 export function setQuiz(quizInfo) {
@@ -77,13 +77,14 @@ export function postQuiz(question_text, true_answer_text, false_answer_text) {
     // - Dispatch the resetting of the form
     // http://localhost:9000/api/quiz/new 
     axios.post('http://localhost:9000/api/quiz/new', {
-      question_text: newQuestion.value,
-      true_answer_text: newTrueAnswer.value,
-      false_answer_text: newFalseAnswer.value
+      question_text,
+      true_answer_text,
+      false_answer_text
     })
     .then(res => {
       console.log(res.data.question)
       dispatch(setMessage(`Congrats: "${res.data.question}" is a great question!`))
+      console.log(setMessage())
       dispatch(resetForm())
     })
     .catch(err => console.log(err)) 
